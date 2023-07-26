@@ -1,16 +1,17 @@
-resource "google_compute_instance" "default" {
-  name         = "test"
-  machine_type = "e2-medium"
-  zone         = "us-central1-a"
 
-  tags = ["foo", "bar"]
-
+resource "google_compute_instance" "vm_instance" {
+  machine_type = var.compute_machine_type
+  name         = var.vm_instance_name
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-      labels = {
-        my_label = "value"
-      }
     }
   }
+
+  network_interface {
+    network = var.vpc_network_name
+    access_config {
+    }
+  }
+  metadata_startup_script = "sudo apt-get update -y && sudo apt-get install apache2 -y && sudo service apache2 start && hostname > /var/www/html/index.html"
 }
