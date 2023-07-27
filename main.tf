@@ -14,12 +14,14 @@ provider "google" {
 }
 module "network" {
   source           = "./modules/network"
-  vpc_network_name = "terraform-network"
+  vpc_network_name = "terraform-network2"
+  group_manager = module.compute.group_manager
+    limiter_ips = ["0.0.0.0/0"]
 }
 module "compute" {
   source           = "./modules/compute"
-  count            = 3
-  vm_instance_name = "web-server-${count.index + 1}"
+#   count            = 3
+  vm_instance_name = "web-server"
   vpc_network_name = module.network.vpc_network_name
-    depends_on = [module.network]
+  
 }
