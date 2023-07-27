@@ -1,10 +1,7 @@
 resource "google_compute_network" "vpc_network" {
   name = var.vpc_network_name
 }
-variable "limiter_ips" {
-  description = "List of IP addresses allowed to access the VM instances."
-  type        = list(string)
-}
+
 resource "google_compute_subnetwork" "subnetwork" {
   name          = "web-server-subnetwork"
   network       = google_compute_network.vpc_network.name
@@ -33,7 +30,7 @@ resource "google_compute_backend_service" "backend_service" {
     group = var.group_manager
   }
 
-  health_checks = [google_compute_http_health_check.health_check.self_link]
+  health_checks = [google_compute_http_health_check.health_check.id]
 }
 
 resource "google_compute_http_health_check" "health_check" {

@@ -20,7 +20,6 @@ module "network" {
 }
 module "compute" {
   source           = "./modules/compute"
-#   count            = 3
   vm_instance_name = "web-server"
   vpc_network_name = module.network.vpc_network_name
   
