@@ -17,7 +17,7 @@ resource "google_compute_instance_template" "vm_instance" {
 }
 
 resource "google_compute_instance_group_manager" "instance_group_manager" {
-  name               = "example-group"
+  name               = "terraform-group"
   base_instance_name = "${var.vm_instance_name}-instance"
   named_port {
     name = "my-port"

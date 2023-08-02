@@ -11,6 +11,8 @@ resource "google_compute_subnetwork" "subnetwork" {
     range_name    = "secondary-range"
     ip_cidr_range = "172.16.0.0/12"  # Use a different CIDR block if needed
   }
+
+  health_checks = [google_compute_http_health_check.health_check.id]
 }
 
 # reserved IP address

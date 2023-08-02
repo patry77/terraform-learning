@@ -21,7 +21,6 @@ module "network" {
 }
 module "compute" {
   source           = "./modules/compute"
-#   count            = 3
   vm_instance_name = "web"
   vpc_network_name = module.network.vpc_network_name
   subnetwork_id    = module.network.subnetwork_id
