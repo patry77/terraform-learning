@@ -4,12 +4,12 @@ variable "gcp_project_id" {
 
 variable "gcp_region" {
   description = "GCP Region of resources"
-  default     = "us-central1"
+  default     = "us-west4"
 }
 
 variable "gcp_zone" {
   description = "GCP Zone of resources"
-  default     = "us-central1-a"
+  default     = "us-west4-a"
 }
 
 variable "gcp_credentials_file" {

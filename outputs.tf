@@ -1,3 +1,3 @@
-# output "instance_ip" {
-#   value = module.compute[*].instance_ip
-# }
+output "instance_ip" {
+  value = module.network.lb_ip
+}
