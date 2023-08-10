@@ -1,9 +1,9 @@
 output "vpc_network_name" {
-    value = google_compute_network.vpc_network.id
+  value = google_compute_network.vpc_network.id
 }
 output "lb_ip" {
-    value = google_compute_global_address.default
+  value = google_compute_global_address.default
 }
-output "subnetwork_id"{
-    value = google_compute_subnetwork.subnetwork.id
+output "subnetwork_id" {
+  value = google_compute_subnetwork.subnetwork.id
 }

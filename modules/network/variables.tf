@@ -10,10 +10,6 @@ variable "limiter_ips" {
   description = "List of IP addresses allowed to access the VM instances"
   type        = list(string)
 }
-variable "limiter_ips" {
-  description = "List of IP addresses allowed to access the VM instances."
-  type        = list(string)
-}
-variable "subnetwork_id"{
+variable "subnetwork_id" {
   description = "Subnetwork ID"
 }

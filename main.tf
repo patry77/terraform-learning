@@ -15,14 +15,14 @@ provider "google" {
 module "network" {
   source           = "./modules/network"
   vpc_network_name = "terraform-network2"
-  group_manager = module.compute.group_manager
-    limiter_ips = ["0.0.0.0/0"]
-  subnetwork_id = "terraform-subnetwork"
+  group_manager    = module.compute.group_manager
+  limiter_ips      = ["0.0.0.0/0"]
+  subnetwork_id    = "terraform-subnetwork"
 }
 module "compute" {
   source           = "./modules/compute"
   vm_instance_name = "web"
   vpc_network_name = module.network.vpc_network_name
   subnetwork_id    = module.network.subnetwork_id
-  
+
 }
