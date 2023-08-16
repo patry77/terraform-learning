@@ -6,24 +6,20 @@ resource "google_compute_network" "vpc_network" {
 resource "google_compute_subnetwork" "subnetwork" {
   name          = var.subnetwork_id
   network       = google_compute_network.vpc_network.name
-  ip_cidr_range = "10.0.0.0/24"
-  secondary_ip_range {
-    range_name    = "secondary-range"
-    ip_cidr_range = "172.16.0.0/12"
-  }
+  ip_cidr_range = var.subnetwork_cidr_range
 }
 
 # reserved IP address
 resource "google_compute_global_address" "default" {
-  name = "l7-xlb-static-ip"
+  name = var.reserved_ip_name
 }
 
 resource "google_compute_router" "nat_router" {
-  name    = "cloud-nat-router"
+  name    = var.cloud_nat_router_name
   network = google_compute_network.vpc_network.self_link
 }
 resource "google_compute_router_nat" "nat_config" {
-  name                               = "cloud-nat-config"
+  name                               = var.cloud_nat_config_name
   router                             = google_compute_router.nat_router.name
   nat_ip_allocate_option             = "AUTO_ONLY"
   source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
@@ -32,19 +28,19 @@ resource "google_compute_router_nat" "nat_config" {
 
 # http proxy
 resource "google_compute_target_http_proxy" "default" {
-  name    = "l7-xlb-target-http-proxy"
+  name    = var.target_http_proxy_name
   url_map = google_compute_url_map.default.id
 }
 
 # url map
 resource "google_compute_url_map" "default" {
-  name            = "l7-xlb-url-map"
+  name            = var.url_map_name
   default_service = google_compute_backend_service.backend_service.id
 }
 resource "google_compute_backend_service" "backend_service" {
-  name                    = "l7-xlb-backend-service"
+  name                    = var.backend_service_name
   protocol                = "HTTP"
-  port_name               = "my-port"
+  port_name               = var.port_name
   load_balancing_scheme   = "EXTERNAL"
   timeout_sec             = 10
   enable_cdn              = true
@@ -59,22 +55,22 @@ resource "google_compute_backend_service" "backend_service" {
 }
 
 resource "google_compute_health_check" "default" {
-  name = "l7-xlb-hc"
+  name = var.health_check_name
   http_health_check {
     port_specification = "USE_SERVING_PORT"
   }
 }
 
 resource "google_compute_global_forwarding_rule" "default" {
-  name                  = "l7-xlb-forwarding-rule"
+  name                  = var.forwarding_rule_name
   ip_protocol           = "TCP"
   load_balancing_scheme = "EXTERNAL"
-  port_range            = "80"
+  port_range            = var.forwarding_rule_port_range
   target                = google_compute_target_http_proxy.default.id
   ip_address            = google_compute_global_address.default.id
 }
 resource "google_compute_firewall" "firewall" {
-  name      = "lb-allow-from-limiters"
+  name      = var.firewall_rule_name
   network   = var.vpc_network_name
   direction = "INGRESS"
   allow {
