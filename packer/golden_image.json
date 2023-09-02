@@ -1,0 +1,26 @@
+{
+    "variables": {
+          "gcloud_account_json": "C:\\Users\\patry\\Desktop\\creds\\prime-task-391816-336c44f61718.json",
+          "gcloud_project_id": "prime-task-391816"
+    },
+    "builders": [
+      {
+        "type": "googlecompute",
+        "account_file": "{{user `gcloud_account_json`}}",
+        "project_id": "{{user `gcloud_project_id`}}",
+        "ssh_username":"ubuntu",
+        "source_image_family": "ubuntu-minimal-2204-lts",
+        "source_image_project_id": "ubuntu-os-cloud",
+        "image_name": "apache-golden-{{timestamp}}",
+        "zone": "us-west4-a",
+        "machine_type":"e2-medium",
+        "image_family":"apache"
+      }
+    ],
+    "provisioners": [
+        {
+             "type": "shell",
+             "script": "C:\\Users\\patry\\Desktop\\my-repos\\terraform-learning-1\\packer\\scripts\\install_apache.sh"
+        }
+    ]
+  }

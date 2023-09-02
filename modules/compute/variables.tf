@@ -1,4 +1,4 @@
-variable "vpc_network_name" {
+variable "vpc_network_id" {
   description = "Provide the network name for the compute instance"
 }
 variable "subnetwork_id" {
@@ -9,9 +9,7 @@ variable "group_manager_name" {
 }
 variable "compute_machine_type" {
   description = "Provide the machine type for the compute instance"
-  default     = "e2-medium"
 }
-
 variable "vm_instance_name" {
   description = "Provide name for the compute instance"
 }

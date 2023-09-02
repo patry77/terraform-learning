@@ -2,16 +2,14 @@ resource "google_compute_instance_template" "vm_instance" {
   machine_type = var.compute_machine_type
   tags         = ["allow-health-check"]
   disk {
-    source_image = "debian-cloud/debian-11"
+    source_image = "apache"
   }
 
   network_interface {
-    network    = var.vpc_network_name
+    network    = var.vpc_network_id
     subnetwork = var.subnetwork_id
   }
-  metadata_startup_script = "sudo apt-get update -y && sudo apt-get install apache2 -y && sudo service apache2 start && hostname > /var/www/html/index.html"
 }
-
 
 resource "google_compute_instance_group_manager" "instance_group_manager" {
   name               = var.group_manager_name
