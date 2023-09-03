@@ -21,24 +21,31 @@ variable "backend_service_name" {
 }
 variable "port_name" {
   description = "Name of the port"
+  type = string
 }
 variable "health_check_name" {
-  description = "Name of the health check" 
+  description = "Name of the health check"
+  type = string
 }
 variable "forwarding_rule_name" {
   description = "Name of the forwarding rule"
+  type = string
 }
 variable "forwarding_rule_port_range" {
   description = "Port range of the forwarding rule"
+  type = string
 }
 variable "firewall_rule_name" {
   description = "Name of the firewall rule"
+  type = string
 }
 variable "vpc_network_name" {
   description = "VPC network name"
+  type = string
 }
 variable subnetwork_name {
   description = "Subnetwork name"
+  type = string
 }
 variable "limiter_ips" {
   description = "List of IPs to allow access to the load balancer"
@@ -46,4 +53,5 @@ variable "limiter_ips" {
 }
 variable "subnetwork_cidr_range" {
   description = "CIDR Range"
+  type = string
 }
