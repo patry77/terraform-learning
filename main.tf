@@ -1,4 +1,10 @@
 terraform {
+  backend "remote" {
+    organization = "internship_learning"
+    workspaces {
+      name = "terraform-project-state"
+    }
+  }
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -37,7 +43,7 @@ module "network" {
 module "compute" {
   source               = "./modules/compute"
   vm_instance_name     = var.vm_instance_name
-  vpc_network_id     = module.network.vpc_network_id
+  vpc_network_id       = module.network.vpc_network_id
   subnetwork_id        = module.network.subnetwork_id
   compute_machine_type = var.compute_machine_type
   group_manager_name   = var.group_manager_name

@@ -99,3 +99,10 @@ variable "group_manager_port" {
   description = "Port of the group manager"
   default     = 80
 }
+#TF Cloud
+variable "organization" {
+  description = "Terraform Cloud organization name"
+}
+variable "workspace" {
+  description = "Terraform Cloud workspace name"
+}
