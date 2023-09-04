@@ -1,7 +1,7 @@
 {
     "variables": {
-          "gcloud_account_json": "C:\\Users\\patry\\Desktop\\creds\\prime-task-391816-336c44f61718.json",
-          "gcloud_project_id": "prime-task-391816"
+          "gcloud_account_json": "{{env `TF_VAR_credential_file`}}",
+          "gcloud_project_id": "{{env `TF_VAR_project_id`}}"
     },
     "builders": [
       {

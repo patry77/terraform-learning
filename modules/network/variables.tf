@@ -1,23 +1,30 @@
 variable "group_manager" {
   description = "Name of instance group manager"
+  type = string
 }
 variable "reserved_ip_name" {
   description = "Name of the reserved IP address"
+  type = string
 }
 variable "cloud_nat_router_name" {
   description = "Name of the Cloud NAT router"
+  type = string
 }
 variable "cloud_nat_config_name" {
   description = "Name of the Cloud NAT config"
+  type = string
 }
 variable "target_http_proxy_name" {
   description = "Name of the target HTTP proxy"
+  type = string
 }
 variable "url_map_name" {
   description = "Name of the URL map"
+  type = string
 } 
 variable "backend_service_name" {
   description = "Name of the backend service"
+  type = string
 }
 variable "port_name" {
   description = "Name of the port"

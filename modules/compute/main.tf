@@ -13,7 +13,7 @@ resource "google_compute_instance_template" "vm_instance" {
 
 resource "google_compute_instance_group_manager" "instance_group_manager" {
   name               = var.group_manager_name
-  base_instance_name = "${var.vm_instance_name}"
+  base_instance_name = var.vm_instance_name
   named_port {
     name = var.port_name
     port = var.group_manager_port
