@@ -1,25 +1,3 @@
-terraform {
-  backend "remote" {
-    organization = "internship_learning"
-    workspaces {
-      name = "terraform-project-state"
-    }
-  }
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.51.0"
-    }
-  }
-}
-
-provider "google" {
-  credentials = file(var.credentials_file)
-  project     = var.project_id
-  region      = var.region
-  zone        = var.zone
-}
-
 module "network" {
   source                     = "./modules/network"
   vpc_network_name           = var.vpc_network_name
@@ -49,4 +27,5 @@ module "compute" {
   group_manager_name   = var.group_manager_name
   port_name            = var.port_name
   group_manager_port   = var.group_manager_port
+  group_manager_size   = var.group_manager_size
 }

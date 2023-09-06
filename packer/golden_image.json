@@ -1,18 +1,19 @@
 {
     "variables": {
-          "gcloud_account_json": "{{env `TF_VAR_credential_file`}}",
-          "gcloud_project_id": "{{env `TF_VAR_project_id`}}"
+          "account_json": "{{env `TF_VAR_credentials_file`}}",
+          "project_id": "{{env `TF_VAR_project_id`}}",
+          "zone": "{{env `TF_VAR_zone`}}"
     },
     "builders": [
       {
         "type": "googlecompute",
-        "account_file": "{{user `gcloud_account_json`}}",
-        "project_id": "{{user `gcloud_project_id`}}",
+        "account_file": "{{user `account_json`}}",
+        "project_id": "{{user `project_id`}}",
         "ssh_username":"ubuntu",
         "source_image_family": "ubuntu-minimal-2204-lts",
         "source_image_project_id": "ubuntu-os-cloud",
         "image_name": "apache-golden-{{timestamp}}",
-        "zone": "us-west4-a",
+        "zone": "{{user `zone`}}",
         "machine_type":"e2-medium",
         "image_family":"apache"
       }
@@ -20,7 +21,7 @@
     "provisioners": [
         {
              "type": "shell",
-             "script": "C:\\Users\\patry\\Desktop\\my-repos\\terraform-learning-1\\packer\\scripts\\install_apache.sh"
+             "script": "./packer/scripts/install_apache.sh"
         }
     ]
   }

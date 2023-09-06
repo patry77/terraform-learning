@@ -21,7 +21,7 @@ resource "google_compute_instance_group_manager" "instance_group_manager" {
   version {
     instance_template = google_compute_instance_template.vm_instance.id
   }
-  target_size = 3
+  target_size = var.group_manager_size
 }
 
 
